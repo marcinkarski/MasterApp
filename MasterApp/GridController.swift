@@ -27,6 +27,7 @@ class GridController: UIViewController {
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: identifier)
+        collectionView.alwaysBounceVertical = true
         collectionView.backgroundColor = .white
         
         collectionView.dataSource = self
