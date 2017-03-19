@@ -22,9 +22,15 @@ class GridController: UIViewController {
     
     func setupCollectionView() {
         let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 10
+        layout.minimumInteritemSpacing = 10
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: identifier)
-        collectionView.backgroundColor = .gray
+        collectionView.backgroundColor = .white
+        
+        collectionView.dataSource = self
+        collectionView.delegate = self
         
         view.addSubview(collectionView)
     }
@@ -38,7 +44,15 @@ extension GridController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
-        cell.backgroundColor = .blue
+        cell.backgroundColor = .lightGray
         return cell
+    }
+}
+
+extension GridController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = (view.frame.width - 10 * 5) / 4
+        return CGSize(width: width, height: width)
     }
 }
